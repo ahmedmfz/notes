@@ -1,0 +1,9 @@
+//this code for cahce images and media url
+<FilesMatch ".(ico|pdf|flv|jpg|jpeg|png|gif|css|swf)$">
+Header set Cache-Control "max-age=31449600, public"
+</FilesMatch>
+
+<FilesMatch ".(js)$">
+Header set Cache-Control "max-age=2592000, public"
+</FilesMatch>
+

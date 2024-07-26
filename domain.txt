@@ -1,0 +1,21 @@
+//configtion to redirect domain
+<VirtualHost *:80>
+    ServerName alwaseet-sa.online
+    ServerAlias www.alwaseet-sa.online
+    DocumentRoot /var/www/alwaseet-sa.online/public
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+     CustomLog ${APACHE_LOG_DIR}/access.log combined
+    <FilesMatch \.php$>
+        SetHandler "proxy:unix:/var/run/php/php8.2-fpm.sock|fcgi://localhost/"
+    </FilesMatch>
+    <Directory /var/www/alwaseet-sa.online/public>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+RewriteEngine on
+RewriteCond %{SERVER_NAME} =alwaseet-sa.online [OR]
+RewriteCond %{SERVER_NAME} =www.alwaseet-sa.online
+RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+</VirtualHost>
+
