@@ -1,0 +1,20 @@
+// install wordpress ubuntu
+wget -c http://wordpress.org/latest.tar.gz
+
+//extract zip 
+tar -xzvf latest.tar.gz
+
+//copy folder in any folder u want
+sudo cp -R wordpress /var/www/html/domain.com 
+
+//change onwer 
+sudo chown -R www-data:www-data /var/www/html/domain.com
+
+//change permission
+sudo chmod -R 775 /var/www/html/domain.com
+
+//in the folder of wordpress rename config.php
+sudo mv wp-config-sample.php wp-config.php
+
+// edit file wp-config.php 
+sudo vim wp-config.php 

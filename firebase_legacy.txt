@@ -1,0 +1,32 @@
+public static function SendFCMToCall($FB_id,$data)
+{
+	if(isset($FB_id) && $FB_id!=""){
+	    Http::withHeaders(["Authorization"=>env("FCM_KEY")])
+	    ->post(
+		"https://fcm.googleapis.com/fcm/send",
+		[
+		    "to"=>$FB_id,
+		    ...$data
+		]
+	    );
+	}
+}
+
+
+
+//object send
+[
+	'notification'=>[
+		'title' =>'Call Request',
+		'body'  =>'order #'.$order->id,
+	],
+	'data'=>[	
+		'phone'         =>$request->phone,
+		'order_number'  =>$order->id,
+		'name'          =>$order->Name,
+		'created_at'    =>now()->format('Y-m-d\TH:i:s.u\Z'),
+	]
+]
+
+
+
