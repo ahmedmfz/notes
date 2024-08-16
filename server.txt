@@ -43,7 +43,27 @@ sudo systemctl enable apache2
 //logs apache2
 sudo tail -f /var/log/apache2/error.log
 
-//comand remove mysql-server
+//command install mysql-server
+sudo apt update
+sudo apt install mysql-server
+sudo mysql
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+sudo mysql_secure_installation
+
+//command install phpmyadmin 
+sudo apt update
+sudo apt install phpmyadmin
+-- abort
+UNINSTALL COMPONENT "file://component_validate_password";
+sudo apt install phpmyadmin
+INSTALL COMPONENT "file://component_validate_password";
+sudo phpenmod mbstring
+sudo systemctl restart apache2
+sudo ln -s /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
+sudo a2enconf phpmyadmin
+sudo systemctl restart apache2
+
+//command remove mysql-server
 sudo apt remove --purge mysql-server
 sudo apt purge mysql-server
 sudo apt autoremove
